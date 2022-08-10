@@ -1,0 +1,142 @@
+////////////////////////////////////////////////////////
+// VARIABLES
+
+$color-dark-blue: #2b3945;
+$color-very-dark-blue-1: #202c37;
+$color-very-dark-blue-2: #111517;
+$color-dark-gray: #858585;
+$color-very-light-gray: #fafafa;
+$color-white: #ffffff;
+
+$font-primary: 'Nunito Sans', sans-serif;
+$font-weight-300: 300;
+$font-weight-600: 600;
+$font-weight-800: 800;
+
+$box-shadow: 0px 0px 35px 1px rgba(0, 0, 0, 0.15);
+$border-radius: 0.7rem;
+
+// BREAKPOINTS
+$bp-big: 81.25em; // 1300/16px
+$bp-medium: 56.25em; // 900/16px
+$bp-small: 37.5em; // 600/16px
+
+// PLACEHOLDER SELECTOR
+%reset-button {
+	border: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	overflow: visible;
+
+	background: transparent;
+
+	/* inherit font & color from ancestor */
+	color: inherit;
+	font: inherit;
+
+	/* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+	line-height: normal;
+
+	/* Corrects font smoothing for webkit */
+	-webkit-font-smoothing: inherit;
+	-moz-osx-font-smoothing: inherit;
+
+	/* Corrects inability to style clickable `input` types in iOS */
+	-webkit-appearance: none;
+}
+
+//MIXIN
+@mixin light-mode($component) {
+	@if $component == body {
+		background-color: $color-very-light-gray;
+
+		& > h1,
+		h2,
+		h3,
+		p,
+		span,
+		svg,
+		button,
+		a {
+			background-color: $color-very-light-gray;
+			color: $color-dark-blue;
+			fill: $color-dark-blue;
+		}
+	}
+
+	@if $component == element {
+		background-color: $color-white !important;
+
+		& > h1,
+		h2,
+		h3,
+		p,
+		span,
+		svg,
+		button,
+		a {
+			background-color: $color-white !important;
+			color: $color-dark-blue;
+			fill: $color-dark-blue;
+		}
+	}
+
+	@if $component == input {
+		& > input {
+			background-color: $color-white !important;
+			color: $color-dark-blue;
+		}
+
+		& > svg {
+			fill: $color-dark-gray;
+		}
+	}
+
+	@if $component == heading {
+		color: $color-dark-blue;
+	}
+}
+
+///////////////////////////////////////////////////////////
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+
+	@media only screen and (max-width: $bp-small) {
+		font-size: 55%;
+	}
+}
+
+body {
+	font-family: $font-primary;
+	line-height: 1.8;
+}
+
+.container {
+	height: 100vh;
+	width: 100vw;
+	background-color: $color-very-dark-blue-1;
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+
+	&--home {
+		overflow: auto;
+	}
+
+	@media only screen and (max-width: $bp-medium) {
+		overflow: auto;
+	}
+}

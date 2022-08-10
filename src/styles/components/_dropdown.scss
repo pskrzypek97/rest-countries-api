@@ -1,0 +1,62 @@
+.dropdown {
+	position: relative;
+	width: 23rem;
+
+	display: flex;
+	flex-direction: column;
+
+	color: $color-white;
+	font-weight: $font-weight-600;
+	font-size: 1.5rem;
+
+	&__button {
+		@extend %reset-button;
+		width: 100%;
+		height: 6rem;
+		padding-inline: 2rem;
+
+		display: inherit;
+		justify-content: space-between;
+		align-items: center;
+
+		background-color: $color-dark-blue;
+		border: $border-radius;
+		box-shadow: $box-shadow;
+
+		cursor: pointer;
+	}
+
+	&__icon {
+		fill: $color-white;
+		width: 1.8rem;
+		height: 1.8rem;
+	}
+
+	&__menu {
+		position: absolute;
+		top: 4.3em;
+		width: inherit;
+
+		display: inherit;
+		flex-direction: inherit;
+
+		border: $border-radius;
+		box-shadow: $box-shadow;
+	}
+
+	&__region {
+		@extend %reset-button;
+		width: 100%;
+		padding-left: 2rem;
+		padding-top: 2rem;
+
+		text-align: start;
+		background-color: $color-dark-blue;
+
+		cursor: pointer;
+
+		&:last-child {
+			padding-bottom: 2rem;
+		}
+	}
+}

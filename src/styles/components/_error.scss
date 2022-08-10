@@ -1,0 +1,21 @@
+.error {
+	position: absolute;
+	margin-top: 30vh;
+	margin-inline: 2rem;
+	align-self: center;
+	justify-self: center;
+
+	display: flex;
+
+	& > svg {
+		width: 10rem;
+		height: 10rem;
+		margin-right: 2rem;
+	}
+
+	& > p {
+		align-self: center;
+		font-size: 3rem;
+		line-height: 1.5;
+	}
+}

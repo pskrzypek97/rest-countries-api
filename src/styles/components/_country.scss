@@ -1,0 +1,102 @@
+.country {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+
+	&__flag {
+		width: 50%;
+		margin-right: 5rem;
+
+		& img {
+			width: clamp(20rem, 45vw, 60rem);
+			max-height: 50rem;
+
+			@media only screen and (max-width: $bp-big) {
+				width: clamp(10rem, 35vw, 45rem);
+			}
+
+			@media only screen and (max-width: $bp-medium) {
+				width: 100%;
+			}
+		}
+
+		@media only screen and (max-width: $bp-big) {
+			margin-right: 3rem;
+			margin-top: 5rem;
+		}
+
+		@media only screen and (max-width: $bp-medium) {
+			width: 100%;
+			margin: 0;
+			margin-bottom: 5rem;
+		}
+	}
+	&__data {
+		padding-block: 2rem;
+		margin-right: 10rem;
+		width: 40%;
+
+		& > *:not(:last-child) {
+			margin-bottom: 2rem;
+		}
+
+		@media only screen and (max-width: $bp-big) {
+			padding-block: 0;
+			margin-right: 5rem;
+		}
+
+		@media only screen and (max-width: $bp-medium) {
+			width: 100%;
+			margin-right: 0;
+		}
+	}
+
+	&__details {
+		display: flex;
+
+		& > *:first-child {
+			margin-right: auto;
+
+			@media only screen and (max-width: $bp-big) {
+				margin-right: 1rem;
+			}
+
+			@media only screen and (max-width: $bp-medium) {
+				margin-right: 0;
+				margin-bottom: 3rem;
+			}
+		}
+
+		@media only screen and (max-width: $bp-medium) {
+			flex-direction: column;
+		}
+	}
+
+	&__neighbours {
+		margin-top: 5rem;
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+
+		& span {
+			font-size: 1.3rem;
+			margin-right: 1.3rem;
+			margin-bottom: 1rem;
+
+			@media only screen and (max-width: $bp-small) {
+				font-size: 1.8rem;
+			}
+		}
+
+		& div {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+
+	@media only screen and (max-width: $bp-medium) {
+		flex-direction: column;
+		align-items: center;
+		margin-bottom: 5rem;
+	}
+}

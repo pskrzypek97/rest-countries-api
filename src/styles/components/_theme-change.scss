@@ -1,0 +1,43 @@
+.theme-change {
+	@extend %reset-button;
+	height: 5rem;
+
+	background: inherit;
+	border: none;
+	display: flex;
+	align-items: center;
+
+	font-size: 1.6rem;
+	color: $color-white;
+	font-weight: $font-weight-600;
+
+	cursor: pointer;
+
+	&__icon {
+		margin-right: 0.8rem;
+		// margin-top: 0.2rem;
+		fill: $color-white;
+		width: 2.3rem;
+		height: 2.3rem;
+	}
+}
+
+.light-mode {
+	@include light-mode(body);
+
+	&--element {
+		@include light-mode(element);
+	}
+
+	&--input {
+		@include light-mode(input);
+	}
+
+	&--heading {
+		@include light-mode(heading);
+	}
+}
+
+.dark-mode {
+	fill: $color-white;
+}
