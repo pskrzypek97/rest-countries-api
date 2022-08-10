@@ -26,6 +26,7 @@ export const CountryProvider = ({ children }) => {
 
 	const goBackHandler = () => {
 		setCountryPage(false);
+		setFilteredCountriesArray(countriesArray);
 	};
 
 	const filterByRegionHandler = (region) => {
