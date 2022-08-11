@@ -13,11 +13,9 @@ const Loading = () => {
 		animation: {
 			rotate: '360deg',
 			transition: {
-				rotate: {
-					yoyo: Infinity,
-					duration: 0.5,
-					ease: 'easeOut',
-				},
+				yoyo: Infinity,
+				duration: 0.5,
+				ease: 'easeOut',
 			},
 		},
 	};

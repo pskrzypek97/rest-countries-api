@@ -9,10 +9,13 @@ export const CountryProvider = ({ children }) => {
 	const [filteredCountriesArray, setFilteredCountriesArray] = useState([]);
 	const [filter, setFilter] = useState(false);
 
+	// creates an array containing all country objects
 	const createCountriesArray = (data) => {
 		setCountriesArray(data);
 	};
 
+	// creates an object containing data about particular country
+	// and opens country detail page
 	const countryDetailHandler = (countryName) => {
 		const filteredCountry = countriesArray.filter((country) => {
 			return countryName.length === 3
@@ -24,11 +27,13 @@ export const CountryProvider = ({ children }) => {
 		setCountryPage(true);
 	};
 
+	// gets user back to the homepage
 	const goBackHandler = () => {
 		setCountryPage(false);
 		setFilteredCountriesArray(countriesArray);
 	};
 
+	// creates new array of country objects filtered by region
 	const filterByRegionHandler = (region) => {
 		if (region === 'America') region = 'Americas';
 
@@ -40,6 +45,7 @@ export const CountryProvider = ({ children }) => {
 		setFilter(true);
 	};
 
+	// creates new array of country objects filtered by search result
 	const searchCountryHandler = (search) => {
 		if (search === '') setFilteredCountriesArray(countriesArray);
 

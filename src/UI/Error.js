@@ -25,7 +25,7 @@ const Error = ({ error }) => {
 			variants={errorVariants}
 			initial="hidden"
 			animate="visible"
-			class={`error ${darkTheme && 'dark-mode'}`}
+			className={`error ${darkTheme && 'dark-mode'}`}
 		>
 			<svg>
 				<use href="/sprite.svg#warning"></use>
