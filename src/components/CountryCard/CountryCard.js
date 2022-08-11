@@ -2,16 +2,36 @@ import { useContext } from 'react';
 
 import ThemeContext from '../../store/ThemeProvider';
 import CountryContext from '../../store/CountryProvider';
+import { motion } from 'framer-motion';
 
 const CountryCard = (props) => {
 	const { darkTheme } = useContext(ThemeContext);
 	const { countryDetailHandler } = useContext(CountryContext);
 
+	const countryCardVariants = {
+		hidden: {
+			opacity: 0,
+		},
+		visible: {
+			opacity: 1,
+			transition: {
+				duration: 1,
+			},
+		},
+		hover: {
+			scale: 1.1,
+		},
+	};
+
 	return (
-		<div
+		<motion.div
 			className={`country-card ${!darkTheme && 'light-mode--element'}`}
 			id={props.name}
 			onClick={() => countryDetailHandler(props.name)}
+			variants={countryCardVariants}
+			initial="hidden"
+			animate="visible"
+			whileHover="hover"
 		>
 			<div>
 				<img
@@ -32,7 +52,7 @@ const CountryCard = (props) => {
 					<span>Capital:</span> {props.capital}
 				</p>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

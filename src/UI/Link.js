@@ -1,17 +1,35 @@
 import { useContext } from 'react';
 
 import CountryContext from '../store/CountryProvider';
+import { motion } from 'framer-motion';
 
 const Link = () => {
 	const { goBackHandler } = useContext(CountryContext);
 
+	const buttonVariants = {
+		hover: {
+			scale: 1.1,
+		},
+	};
+
+	const svgVariants = {
+		hover: {
+			x: '-.5rem',
+		},
+	};
+
 	return (
-		<button onClick={goBackHandler} className="link link--back">
-			<svg className="link__icon">
+		<motion.button
+			whileHover="hover"
+			variants={buttonVariants}
+			onClick={goBackHandler}
+			className="link link--back"
+		>
+			<motion.svg variants={svgVariants} className="link__icon">
 				<use href="/sprite.svg#arrow-left" />
-			</svg>
+			</motion.svg>
 			Back
-		</button>
+		</motion.button>
 	);
 };
 

@@ -3,10 +3,41 @@ import { useContext } from 'react';
 import Neighbours from './Neighbours';
 import ThemeContext from '../../store/ThemeProvider';
 import CountryContext from '../../store/CountryProvider';
+import { motion } from 'framer-motion';
 
 const CountryDetails = () => {
 	const { darkTheme } = useContext(ThemeContext);
 	const { countryDetail } = useContext(CountryContext);
+
+	const flagVariants = {
+		hidden: {
+			x: '-50vw',
+			opacity: 0,
+		},
+		visible: {
+			x: 0,
+			opacity: 1,
+			transition: {
+				duration: 0.5,
+				type: 'spring',
+			},
+		},
+	};
+
+	const dataVariants = {
+		hidden: {
+			x: '50vw',
+			opacity: 0,
+		},
+		visible: {
+			x: 0,
+			opacity: 1,
+			transition: {
+				duration: 0.5,
+				type: 'spring',
+			},
+		},
+	};
 
 	const language =
 		countryDetail.languages.length === 1
@@ -15,11 +46,21 @@ const CountryDetails = () => {
 
 	return (
 		<div className="country">
-			<div className="country__flag">
+			<motion.div
+				variants={flagVariants}
+				initial="hidden"
+				animate="visible"
+				className="country__flag"
+			>
 				<img src={countryDetail.flags} alt={`Flag of ${countryDetail.name}`} />
-			</div>
+			</motion.div>
 
-			<div className="country__data">
+			<motion.div
+				variants={dataVariants}
+				initial="hidden"
+				animate="visible"
+				className="country__data"
+			>
 				<h1 className={`heading-1 ${!darkTheme && 'light-mode--heading'}`}>
 					{countryDetail.name}
 				</h1>
@@ -56,7 +97,7 @@ const CountryDetails = () => {
 				{countryDetail.borders && (
 					<Neighbours bordersArray={countryDetail.borders} />
 				)}
-			</div>
+			</motion.div>
 		</div>
 	);
 };
