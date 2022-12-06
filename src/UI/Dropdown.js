@@ -7,21 +7,13 @@ const Dropdown = () => {
 	const [displayedMenu, setDisplayedMenu] = useState(false);
 	const { filterByRegionHandler } = useContext(CountryContext);
 
-	const displayMenuOnHoverHandler = () => {
-		setDisplayedMenu(true);
-	};
-
 	const displayMenuOnClickHandler = () => {
 		setDisplayedMenu((prevMenu) => !prevMenu);
 	};
 
-	const hideMenuHandler = () => {
-		setDisplayedMenu(false);
-	};
-
 	const filterCountriesHandler = (region) => {
 		filterByRegionHandler(region);
-		setDisplayedMenu(false);
+		setDisplayedMenu((prevMenu) => !prevMenu);
 	};
 
 	const menuVariants = {
@@ -45,11 +37,7 @@ const Dropdown = () => {
 	};
 
 	return (
-		<div
-			className="dropdown"
-			onMouseEnter={displayMenuOnHoverHandler}
-			onMouseLeave={hideMenuHandler}
-		>
+		<div className="dropdown">
 			<button className="dropdown__button" onClick={displayMenuOnClickHandler}>
 				Filter by Region
 				<svg className="dropdown__icon">
