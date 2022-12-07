@@ -19,17 +19,15 @@ export const CountryProvider = ({ children }) => {
 	const countryDetailHandler = (countryName) => {
 		const filteredCountry = countriesArray.filter((country) => {
 			return countryName.length === 3
-				? country.alpha3Code === countryName
+				? country.slug === countryName
 				: country.name === countryName;
 		});
 
 		setCountryDetail(filteredCountry[0]);
-		setCountryPage(true);
 	};
 
 	// gets user back to the homepage
 	const goBackHandler = () => {
-		setCountryPage(false);
 		setFilteredCountriesArray(countriesArray);
 	};
 

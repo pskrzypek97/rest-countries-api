@@ -1,10 +1,10 @@
-import Link from '../UI/Link';
+import LinkBack from '../UI/LinkBack';
 import CountryDetails from '../components/CountryDetails/CountryDetails';
 
 const CoutryPage = () => {
 	return (
 		<main className="main">
-			<Link />
+			<LinkBack />
 			<CountryDetails />
 		</main>
 	);

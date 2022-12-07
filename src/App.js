@@ -1,12 +1,15 @@
 import { useState, useEffect, useContext } from 'react';
 
+import { Routes, Route } from 'react-router-dom';
+
+import ThemeContext from './store/ThemeProvider';
+import CountryContext from './store/CountryProvider';
+
 import Home from './pages/Home';
 import CountryPage from './pages/CountryPage';
 import Header from './components/Header/Header';
 import Loading from './UI/Loading';
 import Error from './UI/Error';
-import ThemeContext from './store/ThemeProvider';
-import CountryContext from './store/CountryProvider';
 
 const transformData = (data) => {
 	const countries = data.map((country) => {
@@ -29,6 +32,11 @@ const transformData = (data) => {
 			languages: country.languages.map((lang) => lang.name),
 			borders: country.borders,
 			flags: country.flags.svg,
+			slug: country.alpha3Code.toLowerCase(),
+			shortName:
+				country.name.length <= 10
+					? country.name
+					: `${country.name.slice(0, 10)}...`,
 		};
 	});
 	return countries;
@@ -41,6 +49,7 @@ const App = () => {
 	const { createCountriesArray, countryPage } = useContext(CountryContext);
 
 	const fetchCountries = async () => {
+		console.log('XD');
 		setLoading(true);
 		setError(null);
 		try {
@@ -48,6 +57,7 @@ const App = () => {
 			const data = await res.json();
 
 			const transformedCountries = transformData(data);
+
 			createCountriesArray(transformedCountries);
 		} catch (err) {
 			setError("Couldn't find countries, please reload the page!");
@@ -63,17 +73,24 @@ const App = () => {
 		!darkTheme && 'light-mode'
 	}`;
 
-	let content;
+	// let content;
 
-	if (error) content = <Error error={error} />;
-	if (!error && loading) content = <Loading />;
-	if (!error && !loading && !countryPage) content = <Home />;
-	if (!error && !loading && countryPage) content = <CountryPage />;
+	// if (error) content = <Error error={error} />;
+	// if (!error && loading) content = <Loading />;
+	// if (!error && !loading && !countryPage) content = <Home />;
+	// if (!error && !loading && countryPage) content = <CountryPage />;
 
 	return (
 		<div className={containerClass}>
 			<Header />
-			{content}
+
+			<Routes>
+				<Route path="/" element={<Home />} />
+
+				<Route path="/:countryCode" element={<CountryPage />} />
+
+				<Route path="*" element={<Error />} />
+			</Routes>
 		</div>
 	);
 };

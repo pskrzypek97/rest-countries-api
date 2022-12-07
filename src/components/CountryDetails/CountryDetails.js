@@ -1,48 +1,70 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import { useParams } from 'react-router-dom';
 
 import Neighbours from './Neighbours';
 import ThemeContext from '../../store/ThemeProvider';
 import CountryContext from '../../store/CountryProvider';
 import { motion } from 'framer-motion';
 
+const flagVariants = {
+	hidden: {
+		x: '-50vw',
+		opacity: 0,
+	},
+	visible: {
+		x: 0,
+		opacity: 1,
+		transition: {
+			duration: 0.5,
+			type: 'spring',
+		},
+	},
+};
+
+const dataVariants = {
+	hidden: {
+		x: '50vw',
+		opacity: 0,
+	},
+	visible: {
+		x: 0,
+		opacity: 1,
+		transition: {
+			duration: 0.5,
+			type: 'spring',
+		},
+	},
+};
+
 const CountryDetails = () => {
 	const { darkTheme } = useContext(ThemeContext);
-	const { countryDetail } = useContext(CountryContext);
+	const { countriesArray } = useContext(CountryContext);
+	const [countryDetail, setCountryDetail] = useState({});
+	// const [countryLang, setCountryLang] = useState('');
 
-	const flagVariants = {
-		hidden: {
-			x: '-50vw',
-			opacity: 0,
-		},
-		visible: {
-			x: 0,
-			opacity: 1,
-			transition: {
-				duration: 0.5,
-				type: 'spring',
-			},
-		},
-	};
+	const params = useParams();
 
-	const dataVariants = {
-		hidden: {
-			x: '50vw',
-			opacity: 0,
-		},
-		visible: {
-			x: 0,
-			opacity: 1,
-			transition: {
-				duration: 0.5,
-				type: 'spring',
-			},
-		},
-	};
+	useEffect(() => {
+		// setLanguage(language);
 
-	const language =
-		countryDetail.languages.length === 1
-			? countryDetail.languages[0]
-			: countryDetail.languages.join(', ');
+		const countryDetailHandler = (countryName) => {
+			const filteredCountry = countriesArray.filter((country) => {
+				return country.slug === countryName;
+			});
+
+			setCountryDetail(filteredCountry[0]);
+		};
+
+		countryDetailHandler(params.countryCode);
+
+		// const language =
+		// 	countryDetail.languages.length === 1
+		// 		? countryDetail.languages[0]
+		// 		: countryDetail.languages.join(', ');
+	}, [params, countriesArray, countryDetail]);
+
+	console.log(countryDetail);
 
 	return (
 		<div className="country">
@@ -89,9 +111,9 @@ const CountryDetails = () => {
 						<p className="paragraph">
 							<span>Currencies:</span> {countryDetail.currencies}
 						</p>
-						<p className="paragraph">
-							<span>Languages:</span> {language}
-						</p>
+						{/* <p className="paragraph">
+							<span>Languages:</span> {countryDetail.languages[0]}
+						</p> */}
 					</div>
 				</div>
 				{countryDetail.borders && (
