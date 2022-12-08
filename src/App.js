@@ -46,22 +46,31 @@ const App = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const { darkTheme } = useContext(ThemeContext);
-	const { createCountriesArray, countryPage } = useContext(CountryContext);
+	const { createCountriesArray } = useContext(CountryContext);
 
 	const fetchCountries = async () => {
-		console.log('XD');
 		setLoading(true);
 		setError(null);
-		try {
-			const res = await fetch('https://restcountries.com/v2/all');
-			const data = await res.json();
 
-			const transformedCountries = transformData(data);
+		const countriesArr = JSON.parse(window.localStorage.getItem('countries'));
 
-			createCountriesArray(transformedCountries);
-		} catch (err) {
-			setError("Couldn't find countries, please reload the page!");
+		if (countriesArr) createCountriesArray(countriesArr);
+
+		if (!countriesArr) {
+			try {
+				const res = await fetch('https://restcountries.com/v2/all');
+				const data = await res.json();
+
+				const transformedCountries = transformData(data);
+
+				createCountriesArray(transformedCountries);
+
+				localStorage.setItem('countries', JSON.stringify(transformedCountries));
+			} catch (err) {
+				setError("Couldn't find countries, please reload the page!");
+			}
 		}
+
 		setLoading(false);
 	};
 
@@ -69,23 +78,21 @@ const App = () => {
 		fetchCountries();
 	}, []);
 
-	const containerClass = `container ${!countryPage && 'container--home'} ${
+	const containerClass = `container container--home ${
 		!darkTheme && 'light-mode'
 	}`;
 
-	// let content;
-
-	// if (error) content = <Error error={error} />;
-	// if (!error && loading) content = <Loading />;
-	// if (!error && !loading && !countryPage) content = <Home />;
-	// if (!error && !loading && countryPage) content = <CountryPage />;
+	let content;
+	if (error) content = <Error error={error} />;
+	if (!error && loading) content = <Loading />;
+	if (!error && !loading) content = <Home />;
 
 	return (
 		<div className={containerClass}>
 			<Header />
 
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={content} />
 
 				<Route path="/:countryCode" element={<CountryPage />} />
 

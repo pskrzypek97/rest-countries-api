@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import ThemeContext from '../../store/ThemeProvider';
-import CountryContext from '../../store/CountryProvider';
-import { motion } from 'framer-motion';
 
 const countryCardVariants = {
 	hidden: {
@@ -23,7 +22,6 @@ const countryCardVariants = {
 
 const CountryCard = (props) => {
 	const { darkTheme } = useContext(ThemeContext);
-	const { countryDetailHandler } = useContext(CountryContext);
 
 	const { name, flags, population, region, capital, slug } = props;
 

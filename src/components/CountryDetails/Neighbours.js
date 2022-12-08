@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CountryContext from '../../store/CountryProvider';
 
 const Neighbours = ({ bordersArray }) => {
-	const { countryDetailHandler, countriesArray } = useContext(CountryContext);
+	const { countriesArray } = useContext(CountryContext);
 	const [neighbours, setNeighbours] = useState([]);
 
 	useEffect(() => {
@@ -14,10 +14,9 @@ const Neighbours = ({ bordersArray }) => {
 				countriesArray.find((country) => country.alpha3Code === border)
 			)
 			.map((border) => {
-				const { name, slug, shortName } = border;
+				const { slug, shortName } = border;
 
 				return {
-					name,
 					slug,
 					shortName,
 				};
@@ -30,13 +29,9 @@ const Neighbours = ({ bordersArray }) => {
 		<div className="country__neighbours">
 			<span>Border Countries:</span>
 			<div>
-				{neighbours.map(({ name, slug, shortName }) => (
+				{neighbours.map(({ slug, shortName }) => (
 					<Link to={`/${slug}`}>
-						<button
-							onClick={() => countryDetailHandler(name)}
-							key={shortName}
-							className="link link--neighbour"
-						>
+						<button key={shortName} className="link link--neighbour">
 							{shortName}
 						</button>
 					</Link>

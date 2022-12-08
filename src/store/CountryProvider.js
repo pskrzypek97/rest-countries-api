@@ -4,26 +4,13 @@ const CountryContext = createContext();
 
 export const CountryProvider = ({ children }) => {
 	const [countriesArray, setCountriesArray] = useState([]);
-	const [countryDetail, setCountryDetail] = useState({});
-	const [countryPage, setCountryPage] = useState(false);
+
 	const [filteredCountriesArray, setFilteredCountriesArray] = useState([]);
 	const [filter, setFilter] = useState(false);
 
 	// creates an array containing all country objects
 	const createCountriesArray = (data) => {
 		setCountriesArray(data);
-	};
-
-	// creates an object containing data about particular country
-	// and opens country detail page
-	const countryDetailHandler = (countryName) => {
-		const filteredCountry = countriesArray.filter((country) => {
-			return countryName.length === 3
-				? country.slug === countryName
-				: country.name === countryName;
-		});
-
-		setCountryDetail(filteredCountry[0]);
 	};
 
 	// gets user back to the homepage
@@ -60,9 +47,6 @@ export const CountryProvider = ({ children }) => {
 			value={{
 				countriesArray,
 				createCountriesArray,
-				countryDetail,
-				countryDetailHandler,
-				countryPage,
 				goBackHandler,
 				filterByRegionHandler,
 				filteredCountriesArray,

@@ -1,11 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+import ThemeContext from '../../store/ThemeProvider';
+
+import { useCountryDetail } from '../../hooks/useCountryDetail';
 
 import Neighbours from './Neighbours';
-import ThemeContext from '../../store/ThemeProvider';
-import CountryContext from '../../store/CountryProvider';
-import { motion } from 'framer-motion';
 
 const flagVariants = {
 	hidden: {
@@ -39,32 +40,8 @@ const dataVariants = {
 
 const CountryDetails = () => {
 	const { darkTheme } = useContext(ThemeContext);
-	const { countriesArray } = useContext(CountryContext);
-	const [countryDetail, setCountryDetail] = useState({});
-	// const [countryLang, setCountryLang] = useState('');
 
-	const params = useParams();
-
-	useEffect(() => {
-		// setLanguage(language);
-
-		const countryDetailHandler = (countryName) => {
-			const filteredCountry = countriesArray.filter((country) => {
-				return country.slug === countryName;
-			});
-
-			setCountryDetail(filteredCountry[0]);
-		};
-
-		countryDetailHandler(params.countryCode);
-
-		// const language =
-		// 	countryDetail.languages.length === 1
-		// 		? countryDetail.languages[0]
-		// 		: countryDetail.languages.join(', ');
-	}, [params, countriesArray, countryDetail]);
-
-	console.log(countryDetail);
+	const countryDetail = useCountryDetail();
 
 	return (
 		<div className="country">
@@ -111,9 +88,11 @@ const CountryDetails = () => {
 						<p className="paragraph">
 							<span>Currencies:</span> {countryDetail.currencies}
 						</p>
-						{/* <p className="paragraph">
-							<span>Languages:</span> {countryDetail.languages[0]}
-						</p> */}
+						{countryDetail?.languages && (
+							<p className="paragraph">
+								<span>Languages:</span> {countryDetail?.languages.join(', ')}
+							</p>
+						)}
 					</div>
 				</div>
 				{countryDetail.borders && (
