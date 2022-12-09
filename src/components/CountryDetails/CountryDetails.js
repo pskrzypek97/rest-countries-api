@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 
 import ThemeContext from '../../store/ThemeProvider';
 
-import { useCountryDetail } from '../../hooks/useCountryDetail';
-
 import Neighbours from './Neighbours';
 
 const flagVariants = {
@@ -38,10 +36,8 @@ const dataVariants = {
 	},
 };
 
-const CountryDetails = () => {
+const CountryDetails = ({ countryDetail }) => {
 	const { darkTheme } = useContext(ThemeContext);
-
-	const countryDetail = useCountryDetail();
 
 	return (
 		<div className="country">

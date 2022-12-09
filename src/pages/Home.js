@@ -1,13 +1,11 @@
-import { useContext } from 'react';
+import { useFilter } from '../hooks/useFilter';
 
 import Form from '../UI/Form';
 import Dropdown from '../UI/Dropdown';
 import CountryCard from '../components/CountryCard/CountryCard';
-import CountryContext from '../store/CountryProvider';
 
 const Home = () => {
-	const { countriesArray, filteredCountriesArray, filter } =
-		useContext(CountryContext);
+	const { filter, countriesArray, filteredCountriesArray } = useFilter();
 
 	return (
 		<main className="main">

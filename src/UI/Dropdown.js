@@ -1,5 +1,7 @@
 import { useState, useContext } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import CountryContext from '../store/CountryProvider';
 import { motion } from 'framer-motion';
 
@@ -12,7 +14,6 @@ const Dropdown = () => {
 	};
 
 	const filterCountriesHandler = (region) => {
-		filterByRegionHandler(region);
 		setDisplayedMenu((prevMenu) => !prevMenu);
 	};
 
@@ -30,7 +31,7 @@ const Dropdown = () => {
 		},
 	};
 
-	const buttonVariants = {
+	const linkVariants = {
 		hover: {
 			x: '0.5rem',
 		},
@@ -53,15 +54,16 @@ const Dropdown = () => {
 					className="dropdown__menu"
 				>
 					{['Africa', 'America', 'Asia', 'Europe', 'Oceania'].map((region) => (
-						<button
-							onClick={() => filterCountriesHandler(region)}
-							key={region}
+						<Link
+							to={`/?region=${region}`}
 							className="dropdown__region"
+							key={region}
+							onClick={() => filterCountriesHandler(region)}
 						>
-							<motion.p variants={buttonVariants} whileHover="hover">
+							<motion.p variants={linkVariants} whileHover="hover">
 								{region}
 							</motion.p>
-						</button>
+						</Link>
 					))}
 				</motion.div>
 			)}

@@ -51,6 +51,7 @@ export const CountryProvider = ({ children }) => {
 				filterByRegionHandler,
 				filteredCountriesArray,
 				filter,
+				setFilter,
 				searchCountryHandler,
 			}}
 		>
