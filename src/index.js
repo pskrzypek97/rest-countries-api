@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import './styles/main.scss';
 import App from './App';
 import { ThemeProvider } from './store/ThemeProvider';
@@ -9,7 +10,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<ThemeProvider>
 		<CountryProvider>
-			<App />
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
 		</CountryProvider>
 	</ThemeProvider>
 );

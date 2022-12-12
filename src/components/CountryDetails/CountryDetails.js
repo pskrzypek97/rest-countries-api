@@ -1,48 +1,43 @@
 import { useContext } from 'react';
 
-import Neighbours from './Neighbours';
-import ThemeContext from '../../store/ThemeProvider';
-import CountryContext from '../../store/CountryProvider';
 import { motion } from 'framer-motion';
 
-const CountryDetails = () => {
+import ThemeContext from '../../store/ThemeProvider';
+
+import Neighbours from './Neighbours';
+
+const flagVariants = {
+	hidden: {
+		x: '-50vw',
+		opacity: 0,
+	},
+	visible: {
+		x: 0,
+		opacity: 1,
+		transition: {
+			duration: 0.5,
+			type: 'spring',
+		},
+	},
+};
+
+const dataVariants = {
+	hidden: {
+		x: '50vw',
+		opacity: 0,
+	},
+	visible: {
+		x: 0,
+		opacity: 1,
+		transition: {
+			duration: 0.5,
+			type: 'spring',
+		},
+	},
+};
+
+const CountryDetails = ({ countryDetail }) => {
 	const { darkTheme } = useContext(ThemeContext);
-	const { countryDetail } = useContext(CountryContext);
-
-	const flagVariants = {
-		hidden: {
-			x: '-50vw',
-			opacity: 0,
-		},
-		visible: {
-			x: 0,
-			opacity: 1,
-			transition: {
-				duration: 0.5,
-				type: 'spring',
-			},
-		},
-	};
-
-	const dataVariants = {
-		hidden: {
-			x: '50vw',
-			opacity: 0,
-		},
-		visible: {
-			x: 0,
-			opacity: 1,
-			transition: {
-				duration: 0.5,
-				type: 'spring',
-			},
-		},
-	};
-
-	const language =
-		countryDetail.languages.length === 1
-			? countryDetail.languages[0]
-			: countryDetail.languages.join(', ');
 
 	return (
 		<div className="country">
@@ -89,9 +84,11 @@ const CountryDetails = () => {
 						<p className="paragraph">
 							<span>Currencies:</span> {countryDetail.currencies}
 						</p>
-						<p className="paragraph">
-							<span>Languages:</span> {language}
-						</p>
+						{countryDetail?.languages && (
+							<p className="paragraph">
+								<span>Languages:</span> {countryDetail?.languages.join(', ')}
+							</p>
+						)}
 					</div>
 				</div>
 				{countryDetail.borders && (

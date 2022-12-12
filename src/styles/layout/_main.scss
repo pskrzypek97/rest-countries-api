@@ -2,6 +2,11 @@
 	padding-inline: 7rem;
 	padding-top: 13rem;
 
+	&--error {
+		padding-top: 3rem;
+		padding-inline: 2rem;
+	}
+
 	@media only screen and (max-width: $bp-small) {
 		padding-inline: 3.5rem;
 	}

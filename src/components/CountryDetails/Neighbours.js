@@ -1,32 +1,42 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
+
+import { Link } from 'react-router-dom';
 
 import CountryContext from '../../store/CountryProvider';
-import { motion } from 'framer-motion';
 
 const Neighbours = ({ bordersArray }) => {
-	const { countryDetailHandler } = useContext(CountryContext);
+	const { countriesArray } = useContext(CountryContext);
+	const [neighbours, setNeighbours] = useState([]);
 
-	const buttonVariants = {
-		hover: {
-			scale: 1.1,
-		},
-	};
+	useEffect(() => {
+		const filteredBorders = bordersArray
+			.map((border) =>
+				countriesArray.find((country) => country.alpha3Code === border)
+			)
+			.map((border) => {
+				const { slug, shortName } = border;
+
+				return {
+					slug,
+					shortName,
+				};
+			});
+
+		setNeighbours(filteredBorders);
+	}, [bordersArray, countriesArray]);
 
 	return (
 		<div className="country__neighbours">
 			<span>Border Countries:</span>
 			<div>
-				{bordersArray.map((border) => (
-					<motion.button
-						variants={buttonVariants}
-						whileHover="hover"
-						onClick={() => countryDetailHandler(border)}
-						key={border}
-						className="link link--neighbour"
-					>
-						{border}
-					</motion.button>
-				))}
+				{neighbours.length &&
+					neighbours.map(({ slug, shortName }) => (
+						<Link to={`/${slug}`}>
+							<button key={shortName} className="link link--neighbour">
+								{shortName}
+							</button>
+						</Link>
+					))}
 			</div>
 		</div>
 	);
