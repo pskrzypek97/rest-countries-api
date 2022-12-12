@@ -29,13 +29,14 @@ const Neighbours = ({ bordersArray }) => {
 		<div className="country__neighbours">
 			<span>Border Countries:</span>
 			<div>
-				{neighbours.map(({ slug, shortName }) => (
-					<Link to={`/${slug}`}>
-						<button key={shortName} className="link link--neighbour">
-							{shortName}
-						</button>
-					</Link>
-				))}
+				{neighbours.length &&
+					neighbours.map(({ slug, shortName }) => (
+						<Link to={`/${slug}`}>
+							<button key={shortName} className="link link--neighbour">
+								{shortName}
+							</button>
+						</Link>
+					))}
 			</div>
 		</div>
 	);

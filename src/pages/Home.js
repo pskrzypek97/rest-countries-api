@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { useFilter } from '../hooks/useFilter';
 
 import Form from '../UI/Form';
@@ -7,12 +9,20 @@ import CountryCard from '../components/CountryCard/CountryCard';
 const Home = () => {
 	const { filter, countriesArray, filteredCountriesArray } = useFilter();
 
-	return (
-		<main className="main">
+	// memoized inputs div so it doesn't re-render when grid is updated
+	const inputs = useMemo(
+		() => (
 			<div className="inputs">
 				<Form />
 				<Dropdown />
 			</div>
+		),
+		[]
+	);
+
+	return (
+		<main className="main">
+			{inputs}
 			<div className="grid">
 				{!filter &&
 					countriesArray.map((country) => {

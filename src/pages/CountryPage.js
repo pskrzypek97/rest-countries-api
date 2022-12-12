@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { useCountryDetail } from '../hooks/useCountryDetail';
 
 import LinkBack from '../UI/LinkBack';
@@ -7,13 +9,14 @@ import Error from '../UI/Error';
 const CoutryPage = () => {
 	const countryDetail = useCountryDetail();
 
-	console.log(countryDetail);
+	// memoized LinkBack so it doesn't re-render when countryDetails is updated
+	const linkBack = useMemo(() => <LinkBack />, []);
 
 	return (
 		<main className="main">
 			{countryDetail && (
 				<>
-					<LinkBack />
+					{linkBack}
 					<CountryDetails countryDetail={countryDetail} />
 				</>
 			)}
