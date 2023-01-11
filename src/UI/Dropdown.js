@@ -1,19 +1,17 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import CountryContext from '../store/CountryProvider';
 import { motion } from 'framer-motion';
 
 const Dropdown = () => {
 	const [displayedMenu, setDisplayedMenu] = useState(false);
-	const { filterByRegionHandler } = useContext(CountryContext);
 
 	const displayMenuOnClickHandler = () => {
 		setDisplayedMenu((prevMenu) => !prevMenu);
 	};
 
-	const filterCountriesHandler = (region) => {
+	const filterCountriesHandler = () => {
 		setDisplayedMenu((prevMenu) => !prevMenu);
 	};
 
@@ -58,7 +56,7 @@ const Dropdown = () => {
 							to={`/?region=${region}`}
 							className="dropdown__region"
 							key={region}
-							onClick={() => filterCountriesHandler(region)}
+							onClick={filterCountriesHandler}
 						>
 							<motion.p variants={linkVariants} whileHover="hover">
 								{region}
